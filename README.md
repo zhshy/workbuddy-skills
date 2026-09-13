@@ -65,7 +65,7 @@ Windows 安装：`winget install --id JohnMacFarlane.Pandoc`
 | [sunshaozhen-text-analysis](https://github.com/zhshy/sunshaozhen-text-analysis) | 孙绍振文本微观分析（还原—比较—矛盾） |
 | [wang-rongsheng-reading-design](https://github.com/zhshy/wang-rongsheng-reading-design) | 王荣生阅读教学设计 + 检测设计 |
 | [xiaopeidong-qianqian-teaching](https://github.com/zhshy/xiaopeidong-qianqian-teaching) | 肖培东"浅浅地教语文"课堂艺术 |
-| [gaoyi-chinese-lesson-design](https://github.com/zhshy/gaoyi-chinese-lesson-design) | 高一语文教学设计（统编版必修上下册） |
+| [chinese-lesson-design](https://github.com/zhshy/chinese-lesson-design) | 语文教学设计（统编版必修上下册 + 选择性必修上中下册） |
 | [gaoyi-writing-coach](https://github.com/zhshy/gaoyi-writing-coach) | 高中作文批改与升格 |
 
 ## 许可
