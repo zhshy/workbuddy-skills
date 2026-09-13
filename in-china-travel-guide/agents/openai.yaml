@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open Travel Handbook"
+  short_description: "Generate a complete eight-module travel handbook"
+  default_prompt: "Use $build-personalized-travel-guide-open-source to create a complete destination handbook from my preferences. Keep flight and hotel research out of scope, preserve the responsive eight-module product, and omit Google ratings immediately when they are unavailable during normal place lookup."

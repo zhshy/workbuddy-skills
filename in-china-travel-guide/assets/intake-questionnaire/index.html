@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>旅行手册 · 偏好问卷</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f2f7f5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 44px 48px 36px;
+      box-shadow: 0 12px 48px rgba(26, 58, 74, 0.08);
+      transition: box-shadow 0.3s;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 28px 20px 24px;
+      }
+    }
+
+    /* ===== Header ===== */
+    .header {
+      margin-bottom: 32px;
+      border-bottom: 2px solid #eaf1ee;
+      padding-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a3a4a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .header h1 span {
+      background: #eaf1ee;
+      font-size: 22px;
+      border-radius: 12px;
+      padding: 0 6px;
+    }
+
+    .header .sub {
+      color: #6f8a8a;
+      font-size: 15px;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* ===== Form ===== */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 15px;
+      color: #1a3a4a;
+      margin-bottom: 5px;
+    }
+
+    label .hint {
+      font-weight: 400;
+      color: #8fa8a8;
+      font-size: 13px;
+      margin-left: 4px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fafcfb;
+      border: 1.5px solid #dee9e5;
+      border-radius: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color: #1a2e3a;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #3ba0a8;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(59, 160, 168, 0.10);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .row-2 {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    /* ===== Checkbox Group ===== */
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      background: #f4f9f7;
+      padding: 8px 18px 8px 14px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      border: 1px solid transparent;
+      color: #1a3a4a;
+    }
+
+    .checkbox-group label:hover {
+      background: #e6f0ec;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #2a7a7a;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .checkbox-group label:has(input:checked) {
+      background: #dcebe7;
+      border-color: #8fc0b8;
+    }
+
+    /* ===== Region Select ===== */
+    .region-hint {
+      font-size: 12px;
+      color: #8fa8a8;
+      margin-top: 5px;
+    }
+
+    /* ===== Submit ===== */
+    .btn-submit {
+      background: #1a3a4a;
+      color: #ffffff;
+      border: none;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.1s;
+      margin-top: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit:hover {
+      background: #2a5a6a;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .footnote {
+      text-align: center;
+      color: #8fa8a8;
+      font-size: 13px;
+      margin-top: 18px;
+      border-top: 1px solid #eaf1ee;
+      padding-top: 18px;
+    }
+
+    /* ===== Utility ===== */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <h1>
+        <span>🧳</span> 旅行手册
+      </h1>
+      <div class="sub">填写你的旅行偏好 · 生成专属指南</div>
+    </div>
+
+    <!-- FORM -->
+    <form id="travelForm" autocomplete="off">
+
+      <!-- 目的地 -->
+      <div class="form-group">
+        <label for="destination">目的地 <span class="hint">（城市名称）</span></label>
+        <input
+          type="text"
+          id="destination"
+          placeholder="例如：成都、西安、东京、巴黎"
+          required
+        />
+      </div>
+
+      <!-- 天数 + 人数 -->
+      <div class="row-2">
+        <div class="form-group">
+          <label for="days">天数</label>
+          <input type="number" id="days" placeholder="3" min="1" max="21" required />
+        </div>
+        <div class="form-group">
+          <label for="travelers">人数</label>
+          <input type="number" id="travelers" placeholder="2" min="1" max="20" required />
+        </div>
+      </div>
+
+      <!-- 旅行风格（多选） -->
+      <div class="form-group">
+        <label>旅行风格 <span class="hint">（可多选）</span></label>
+        <div class="checkbox-group" id="styleGroup">
+          <label><input type="checkbox" value="文化历史" /> 文化历史</label>
+          <label><input type="checkbox" value="美食探索" /> 美食探索</label>
+          <label><input type="checkbox" value="自然风光" /> 自然风光</label>
+          <label><input type="checkbox" value="休闲放松" /> 休闲放松</label>
+          <label><input type="checkbox" value="购物血拼" /> 购物血拼</label>
+          <label><input type="checkbox" value="亲子家庭" /> 亲子家庭</label>
+        </div>
+      </div>
+
+      <!-- 特别偏好（可选） -->
+      <div class="form-group">
+        <label for="preferences">特别偏好 <span class="hint">（可选）</span></label>
+        <textarea
+          id="preferences"
+          placeholder="例如：喜欢逛本地市场、想体验茶文化、对历史建筑感兴趣…"
+        ></textarea>
+      </div>
+
+      <!-- 区域确认（新增：替代配色选择） -->
+      <div class="form-group">
+        <label for="regionConfirm">📍 目的地位置 <span class="hint">（用于选择地图和评分来源）</span></label>
+        <select id="regionConfirm">
+          <option value="auto">自动判断（推荐）</option>
+          <option value="domestic">中国境内（百度地图 + 大众点评）</option>
+          <option value="international">境外（Google Maps）</option>
+        </select>
+        <div class="region-hint">系统将根据目的地自动判断，如有误差可手动修正</div>
+      </div>
+
+      <!-- 提交 -->
+      <button type="submit" class="btn-submit">✨ 生成旅行手册</button>
+
+      <div class="footnote">生成后你将获得一份可直接保存的 HTML 旅行手册</div>
+    </form>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT -->
+  <script>
+    (function() {
+      const FORM = document.getElementById('travelForm');
+      const STORAGE_KEY = 'travelGuideFormData';
+
+      // ---------- 工具 ----------
+      function getVal(id) {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+      }
+
+      function getCheckedValues(groupId) {
+        const container = document.getElementById(groupId);
+        if (!container) return [];
+        const checks = container.querySelectorAll('input[type="checkbox"]:checked');
+        return Array.from(checks).map(cb => cb.value);
+      }
+
+      function setVal(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+      }
+
+      // ---------- 保存 / 加载 ----------
+      function saveForm() {
+        try {
+          const data = {
+            destination: getVal('destination'),
+            days: getVal('days'),
+            travelers: getVal('travelers'),
+            styles: getCheckedValues('styleGroup'),
+            preferences: getVal('preferences'),
+            regionConfirm: getVal('regionConfirm'),
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (_) { /* ignore */ }
+      }
+
+      function loadForm() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+
+          if (data.destination) setVal('destination', data.destination);
+          if (data.days) setVal('days', data.days);
+          if (data.travelers) setVal('travelers', data.travelers);
+          if (data.preferences !== undefined) setVal('preferences', data.preferences);
+          if (data.regionConfirm) setVal('regionConfirm', data.regionConfirm);
+
+          // 恢复多选
+          if (data.styles && Array.isArray(data.styles)) {
+            const container = document.getElementById('styleGroup');
+            if (container) {
+              const checks = container.querySelectorAll('input[type="checkbox"]');
+              checks.forEach(cb => {
+                cb.checked = data.styles.includes(cb.value);
+              });
+            }
+          }
+        } catch (_) { /* ignore */ }
+      }
+
+      // ---------- 自动保存（输入时） ----------
+      function autoSave() {
+        saveForm();
+      }
+
+      // ---------- 收集数据 ----------
+      function collectFormData() {
+        return {
+          destination: getVal('destination'),
+          days: parseInt(getVal('days')) || 3,
+          travelers: parseInt(getVal('travelers')) || 2,
+          styles: getCheckedValues('styleGroup'),
+          preferences: getVal('preferences'),
+          regionConfirm: getVal('regionConfirm') || 'auto',
+        };
+      }
+
+      // ---------- 提交 ----------
+      FORM.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const data = collectFormData();
+
+        if (!data.destination) {
+          alert('📍 请填写目的地');
+          return;
+        }
+
+        // 保存
+        saveForm();
+
+        // 友好提示
+        const regionLabel =
+          data.regionConfirm === 'domestic' ? '中国境内（百度地图）' :
+          data.regionConfirm === 'international' ? '境外（Google Maps）' :
+          '自动判断';
+
+        const styleText = data.styles.length ? data.styles.join('、') : '未选择';
+
+        const msg = [
+          '✅ 问卷已提交！',
+          '',
+          '📍 目的地：' + data.destination,
+          '📅 天数：' + data.days + ' 天',
+          '👥 人数：' + data.travelers + ' 人',
+          '🎨 风格：' + styleText,
+          '🗺️ 区域：' + regionLabel,
+          data.preferences ? '📝 偏好：' + data.preferences : '',
+          '',
+          '请将以上信息发送给助手，开始生成旅行手册。',
+        ].filter(Boolean).join('\n');
+
+        alert(msg);
+
+        // 也输出到控制台（方便调试）
+        console.log('📋 表单数据：', data);
+        console.log('🔗 可传递给助手的参数：', new URLSearchParams({
+          destination: data.destination,
+          days: data.days,
+          travelers: data.travelers,
+          styles: data.styles.join(','),
+          preferences: data.preferences,
+          region: data.regionConfirm,
+        }).toString());
+      });
+
+      // ---------- 绑定自动保存 ----------
+      const inputs = FORM.querySelectorAll('input, textarea, select');
+      inputs.forEach(el => {
+        el.addEventListener('change', autoSave);
+        el.addEventListener('input', autoSave);
+      });
+
+      // ---------- 初始化 ----------
+      loadForm();
+
+      // 额外：如果用户清除了 localStorage，可通过此方法重置（不暴露 UI，但可用）
+      console.log('💡 如需重置表单，在控制台执行：localStorage.removeItem("travelGuideFormData")');
+
+    })();
+  </script>
+
+</body>
+</html>
